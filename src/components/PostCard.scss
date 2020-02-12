@@ -1,0 +1,189 @@
+@import "../styles/mixins";
+@import "../styles/variables";
+
+div.card__wrapper.card {
+  width: 343px;
+  height: 177px;
+  left: 1px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-radius: 3px;
+  background: $card_background;
+  border: none;
+  @include for-tablet-portrait-up {
+    width: 720px;
+    height: 171px;
+    left: 24px;
+  }
+  @include for-desktop-up {
+    width: 1131px;
+    height: 168px;
+    left: 2px;
+    margin-bottom: 32px;
+  }
+}
+
+div.card__icon {
+  display: none;
+  @include for-tablet-portrait-up {
+    display: inline-block;
+  }
+  @include for-desktop-up {
+    display: inline-block;
+  }
+}
+
+hr.card__divider {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: 0.5px solid #e0e4e8;
+  @include for-tablet-portrait-up {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  @include for-desktop-up {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    width: 120%;
+  }
+}
+
+div.card-body {
+  padding: 1rem;
+  @include for-tablet-portrait-up {
+    padding: 1.5rem;
+  }
+  @include for-desktop-up {
+    padding: 1rem;
+  }
+}
+
+div.card__policytitle {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+  color: $font_color;
+  @include for-tablet-portrait-up {
+  }
+  @include for-desktop-up {
+    font-size: 24px;
+    line-height: 30px;
+  }
+}
+
+div.card__policysubtitle {
+  font-family: "Bitter";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: $shallow_font_color;
+  @include for-tablet-portrait-up {
+  }
+  @include for-desktop-up {
+  }
+}
+
+div.card__metatitle {
+  font-size: 16px;
+  line-height: 24px;
+  color: $font_color;
+  @include for-desktop-up {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+div.card__metasubtitle {
+  font-family: "Bitter";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  padding-top: 4px;
+  color: $shallow_font_color2;
+  @include for-tablet-portrait-up {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+div.card__metaactive {
+  font-family: "brandon-grotesque";
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $green_font;
+}
+
+div.card__metaexpired {
+  font-family: "brandon-grotesque";
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $red_font;
+}
+
+span.card__metapoint {
+  font-size: 14px;
+  @include for-tablet-portrait-up {
+    font-size: 18px;
+  }
+  @include for-desktop-up {
+    font-size: 18px;
+  }
+}
+
+div.card__metacol {
+  display: none;
+  @include for-tablet-portrait-up {
+    display: inline-block;
+  }
+  @include for-desktop-up {
+    display: inline-block;
+  }
+}
+
+div.card__metalongcol {
+  border-right: none;
+  @include for-tablet-portrait-up {
+    border-right: 1px solid #dee2e6 !important;
+  }
+  @include for-desktop-up {
+    border-right: 1px solid #dee2e6 !important;
+  }
+}
+
+div.logo__desktop {
+  display: none;
+  @include for-desktop-up {
+    display: inline-block;
+    padding-right: 24px;
+  }
+}
+
+div.logo__tablet {
+  display: none;
+  @include for-tablet-portrait-up {
+    display: inline-block;
+  }
+  @include for-desktop-up {
+    display: none;
+  }
+}
+
+div.logo__phone {
+  display: inline-block;
+  @include for-tablet-portrait-up {
+    display: none;
+  }
+  @include for-desktop-up {
+    display: none;
+  }
+}
+
+.card__active {
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+}
