@@ -3,6 +3,8 @@ import axios from "axios";
 import { API_Address } from "../common/config";
 import PostCard from "../components/PostCard";
 import { withRouter } from "react-router";
+import { Spinner } from "reactstrap";
+import "./PostList.sass";
 
 const PostList = props => {
   const [postlist, setPostlist] = useState([]);
@@ -29,20 +31,26 @@ const PostList = props => {
 
   return (
     <React.Fragment>
-      {postlist.map((post, index) => (
-        <div
-          key={post.id}
-          onClick={() => {
-            setSelectedPost(post.id);
-          }}
-        >
-          <PostCard
-            post={post}
-            selectedPost={selectedPost}
-            props={props}
-          ></PostCard>
+      {postlist.length !== 0 ? (
+        postlist.map((post, index) => (
+          <div
+            key={post.id}
+            onClick={() => {
+              setSelectedPost(post.id);
+            }}
+          >
+            <PostCard
+              post={post}
+              selectedPost={selectedPost}
+              props={props}
+            ></PostCard>
+          </div>
+        ))
+      ) : (
+        <div className="centered-spinner">
+          <Spinner style={{ width: "3rem", height: "3rem" }} type="grow" />
         </div>
-      ))}
+      )}
     </React.Fragment>
   );
 };

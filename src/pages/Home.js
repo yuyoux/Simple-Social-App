@@ -8,7 +8,7 @@ const Home = props => {
     <div>
       <Jumbotron>
         <h1 className="display-3">Hello! Welcome to BTC Social.</h1>
-        <Row className="justify-content-center">
+        <Row className="justify-content-center mt-4">
           <Col xs="2" className="text-left">
             <Button
               className="home__button"
@@ -23,7 +23,15 @@ const Home = props => {
             </Button>
           </Col>
           <Col xs="2" className="text-left">
-            <Button className="home__button" size="lg">
+            <Button
+              className="home__button"
+              size="lg"
+              onClick={() => {
+                props.history.push({
+                  pathname: "/createpost"
+                });
+              }}
+            >
               CREATE
             </Button>
           </Col>
