@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_Address } from "../common/config";
 import {
   FormGroup,
   Label,
@@ -12,56 +10,35 @@ import {
   Spinner
 } from "reactstrap";
 import CommentCard from "../components/CommentCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getCommentList, submuitComment } from "../actions";
 
 const PostComment = props => {
-  const [commentList, setCommentList] = useState([]);
   const [newComent, setNewComment] = useState("");
   const [id, setId] = useState(props.match.params.id);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const getCommentList = async id => {
-    await axios({
-      url: API_Address + `/posts/${id}/comments`,
-      method: "get",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => {
-        setCommentList(res.data);
-      })
-      .catch(err => console.log(err));
-  };
-
-  const submuitComment = async () => {
-    await axios({
-      url: API_Address + `/posts/${id}/comments`,
-      method: "post",
-      data: {
-        name: name,
-        email: email,
-        body: newComent
-      },
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => {
-        alert("Successfully added your comment.");
-      })
-      .catch(err => console.log(err))
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  // Redux
+  const dispatch = useDispatch();
+  const commentList = useSelector(state => state.post.commentlist);
+  const flag = useSelector(state => state.post.flag);
 
   useEffect(() => {
-    getCommentList(id);
-  }, [id]);
+    if (flag === "success") {
+      alert("Successfully add your comment.");
+    }
+  }, [flag]);
+
+  useEffect(() => {
+    dispatch(
+      getCommentList({
+        data: {
+          id
+        }
+      })
+    );
+  }, [dispatch, id]);
 
   return (
     <React.Fragment>
@@ -107,24 +84,28 @@ const PostComment = props => {
           </FormGroup>
         </Col>
         <Col xs="12" className="text-right">
-          {loading ? (
-            <Spinner style={{ width: "3rem", height: "3rem" }} type="grow" />
-          ) : (
-            <Button
-              className="home__button"
-              size="sm"
-              onClick={() => {
-                setLoading(true);
-                submuitComment();
-              }}
-            >
-              COMMENT
-            </Button>
-          )}
+          <Button
+            className="home__button"
+            size="sm"
+            onClick={() => {
+              dispatch(
+                submuitComment({
+                  data: {
+                    id,
+                    name,
+                    email,
+                    newComent
+                  }
+                })
+              );
+            }}
+          >
+            COMMENT
+          </Button>
         </Col>
       </Row>
       <p>comments:</p>
-      {commentList.length !== 0 ? (
+      {commentList ? (
         commentList.map((comment, index) => (
           <div key={comment.id}>
             <CommentCard comment={comment}></CommentCard>

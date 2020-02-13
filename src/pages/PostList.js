@@ -1,37 +1,25 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_Address } from "../common/config";
 import PostCard from "../components/PostCard";
 import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import "./PostList.sass";
+import { useDispatch, useSelector } from "react-redux";
+import { getPostList } from "../actions";
 
 const PostList = props => {
-  const [postlist, setPostlist] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  const getPostList = async () => {
-    await axios({
-      url: API_Address + "/posts",
-      method: "get",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => {
-        setPostlist(res.data);
-      })
-      .catch(err => console.log(err));
-  };
+  // Redux
+  const dispatch = useDispatch();
+  const postlist = useSelector(state => state.post.postlist);
 
   useEffect(() => {
-    getPostList();
-  }, []);
+    dispatch(getPostList());
+  }, [dispatch]);
 
   return (
     <React.Fragment>
-      {postlist.length !== 0 ? (
+      {postlist ? (
         postlist.map((post, index) => (
           <div
             key={post.id}

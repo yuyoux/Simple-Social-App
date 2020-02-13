@@ -1,45 +1,21 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { API_Address } from "../common/config";
-import {
-  FormGroup,
-  Label,
-  Input,
-  Form,
-  Row,
-  Col,
-  Button,
-  Spinner,
-  Card
-} from "reactstrap";
+import React, { useState, useEffect } from "react";
+import { FormGroup, Label, Input, Form, Row, Col, Button } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { submuitPost } from "../actions";
 
 const CreatePost = props => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const submuitPost = async () => {
-    await axios({
-      url: API_Address + "/posts",
-      method: "post",
-      data: {
-        body: content,
-        title: title,
-        userId: 1
-      },
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => {
-        alert("Successfully created your new post.");
-      })
-      .catch(err => console.log(err))
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  // Redux
+  const dispatch = useDispatch();
+  const flag = useSelector(state => state.post.flag);
+
+  useEffect(() => {
+    if (flag === "success") {
+      alert("Successfully add your post.");
+    }
+  }, [flag]);
 
   return (
     <React.Fragment>
@@ -73,20 +49,23 @@ const CreatePost = props => {
           </Form>
         </Col>
         <Col xs="12" className="text-right">
-          {loading ? (
-            <Spinner style={{ width: "3rem", height: "3rem" }} type="grow" />
-          ) : (
-            <Button
-              className="home__button"
-              size="sm"
-              onClick={() => {
-                setLoading(true);
-                submuitPost();
-              }}
-            >
-              Create
-            </Button>
-          )}
+          <Button
+            className="home__button"
+            size="sm"
+            onClick={() => {
+              dispatch(
+                submuitPost({
+                  data: {
+                    content,
+                    userId: 1,
+                    title
+                  }
+                })
+              );
+            }}
+          >
+            Create
+          </Button>
         </Col>
       </Row>
     </React.Fragment>
