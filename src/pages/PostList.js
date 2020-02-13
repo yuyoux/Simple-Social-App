@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_Address } from "../common/config";
 import PostCard from "../components/PostCard";
+import { withRouter } from "react-router";
 
-const PostList = () => {
+const PostList = props => {
   const [postlist, setPostlist] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  const getPolicyList = async () => {
+  const getPostList = async () => {
     await axios({
-      url: API_Address,
+      url: API_Address + "/posts",
       method: "get",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -17,24 +18,33 @@ const PostList = () => {
       }
     })
       .then(res => {
-        setPostlist(res.data.policies);
+        setPostlist(res.data);
       })
       .catch(err => console.log(err));
   };
 
   useEffect(() => {
-    getPolicyList();
+    getPostList();
   }, []);
 
   return (
     <React.Fragment>
       {postlist.map((post, index) => (
-        <div key={post.id} onClick={() => {}}>
-          <PostCard policy={post} selectedPost={selectedPost}></PostCard>
+        <div
+          key={post.id}
+          onClick={() => {
+            setSelectedPost(post.id);
+          }}
+        >
+          <PostCard
+            post={post}
+            selectedPost={selectedPost}
+            props={props}
+          ></PostCard>
         </div>
       ))}
     </React.Fragment>
   );
 };
 
-export default PostList;
+export default withRouter(PostList);

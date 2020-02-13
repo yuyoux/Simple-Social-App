@@ -1,0 +1,46 @@
+@import "../styles/_mixins.sass"
+@import "../styles/_variables.sass"
+
+div.commentcard__wrapper.card
+    height: 220px
+    left: 1px
+    margin-top: 24px
+    margin-bottom: 24px
+    border-radius: 3px
+    background: $background
+    border: none
+@include for-tablet-portrait-up
+    height: 150px
+    left: 24px
+@include for-desktop-up
+    height: 150px
+    left: 2px
+
+hr.commentcard__divider
+    margin-top: 8px
+    margin-bottom: 8px
+    border: 0.5px solid #e0e4e8
+@include for-tablet-portrait-up
+    margin-top: 16px
+    margin-bottom: 16px
+
+@include for-desktop-up
+    margin-top: 16px
+    margin-bottom: 16px
+
+div.commnetcard__posttitle
+    font-size: 20px
+    line-height: 30px
+    font-weight: 800
+    color: $font_color
+@include for-desktop-up
+    font-size: 24px
+    line-height: 30px
+
+div.commentcard__metatitle
+    font-size: 16px
+    line-height: 24px
+    color: $font_color
+@include for-desktop-up
+    font-size: 16px
+    line-height: 24px

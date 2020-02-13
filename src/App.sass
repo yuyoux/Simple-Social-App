@@ -1,0 +1,45 @@
+@import "./styles/mixins.sass"
+@import "./styles/variables.sass"
+
+.App
+  text-align: left
+  position: absolute
+  width: 344px
+  height: 570px
+  left: calc(50% - 344px / 2 - 0.5px)
+  top: 15px
+  @include for-tablet-portrait-up
+    width: 768px
+    height: 620px
+    left: calc(50% - 768px / 2)
+    top: 24px
+  @include for-desktop-up
+    width: 1133px
+    height: 632px
+    left: calc(50% - 1133px / 2 - 0.5px)
+    top: 48px
+
+body h1
+  font-family: "brandon-grotesque"
+  color: $card_background
+  font-size: 20px
+  line-height: 30px
+  font-weight: 800
+  left: 1px
+  display: flex
+  align-items: center
+  text-transform: uppercase
+  margin-bottom: 15px
+  @include for-tablet-portrait-up
+    font-size: 28px
+    line-height: 35px
+    font-weight: 800
+    margin-left: 24px
+    margin-bottom: 24px
+  @include for-desktop-up
+    font-size: 32px
+    line-height: 40px
+    font-weight: 800
+    left: 1px
+    margin-left: 0
+    margin-bottom: 48px

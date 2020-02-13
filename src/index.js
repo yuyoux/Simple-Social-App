@@ -1,15 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./index.sass";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
-import {
-  Switch,
-  Route,
-  BrowserRouter as Router,
-  Redirect
-} from "react-router-dom";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
